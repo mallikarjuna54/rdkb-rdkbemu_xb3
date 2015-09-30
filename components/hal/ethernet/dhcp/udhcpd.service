@@ -1,0 +1,13 @@
+[Unit]
+Description=udhcpd server 
+After=network.target lighttpd.service
+
+[Service]
+ExecStartPre=/usr/bin/startudhcpd.sh eth1  
+ExecStart=/usr/sbin/udhcpd /etc/udhcp.conf
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
+
+
