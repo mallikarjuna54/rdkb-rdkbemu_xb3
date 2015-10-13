@@ -16,6 +16,11 @@
 #define DHCP_PID "> /tmp/pidof"
 #define DHCP_PATH "/tmp/pidof"
 #define DHCPv4_PID "pidof "
+#define FILE_NAME "/nmap.txt"
+#define HOSTS_MATCH "hosts up"
+#define HOST_MATCH "host up"
+#define ULONG unsigned long
+
 
 typedef struct config_values
 {
@@ -54,6 +59,11 @@ int CcspHalNetmasksetvalue(char *name,char *str);
 
 /* Getting the process id of dhcp server */
 int CcspHalGetPIDbyName(char* pidName);
+
+/* Getting number of client connected devices*/
+ULONG CcspHalNoofClientConnected();
+
+
 
 
 #endif
