@@ -156,7 +156,10 @@ int CcspHalSetDHCPConfigValues(unsigned int value_flag, ConfigValues *config_val
         }
 
         if(value_flag&GATEWAY)
+		{
                 ret = CcspHal_change_config_value("opt router ", config_value->gateway, buf, &nbytes);
+		ret = CcspHal_change_config_value("option dns ", config_value->gateway, buf, &nbytes);
+		}
         if(value_flag&SUBNET_MASK)
                 ret = CcspHal_change_config_value("option subnet ",config_value->subnet, buf, &nbytes);
         if(value_flag&DHCP_STARTING_RANGE)
@@ -187,6 +190,10 @@ int CcspHalSetDHCPConfigValues(unsigned int value_flag, ConfigValues *config_val
                 printf("write failed: %m\n");
                 return -1;
         }
+	close(fd);
+        system("killall dnsmasq");
+        system("/usr/bin/dnsmasq -N -a 127.0.0.1 -z");
+        usleep(150);
         system("killall udhcpd");
         system("udhcpd /etc/udhcpd.conf");
         return 0;
@@ -238,59 +245,7 @@ int CcspHalGetPIDbyName(char* pidName)
         fclose(fp);
          }
        return pidValue;
- 	
 	}
-
-/* To get number of client connected devices*/
-ULONG CcspHalNoofClientConnected()
-{
-        uint32_t ip_integer;
-        char str[INET_ADDRSTRLEN];
-        FILE *fp;
-        ULONG l=0;
-        char cmd[FILE_SIZE]= {'\0'};
-        char temp[FILE_SIZE],arr[FILE_SIZE],arr1[FILE_SIZE];
-        int k,j=0,i;
-        ip_integer=CosaUtilGetIfAddr("eth1");
-        inet_ntop(AF_INET, &(ip_integer), str, INET_ADDRSTRLEN);
-        sprintf(cmd,"%s %s%s %s","nmap -sP ",str,"/24 ","> /nmap.txt");
-        printf("%s %s%s %s","nmap -sP ",str,"/24 ","> nmap.txt");
-        system(cmd);
-        fp = fopen(FILE_NAME,"r");
-        while(fgets(temp,FILE_SIZE,fp)!=NULL){
-                if(strstr(temp,HOSTS_MATCH)!=NULL){
-                        for(k=0;temp[k];k++)
-                                {
-                                arr[k] = temp[k];
-                                }
-                                arr[k] = '\0';
-                for(i=29;arr[i]!=' ';i++)//To get current position 
-                {
-                        arr1[j] = arr[i];
-                        j++;
-                }
-                }
-                else
-                {
-                if(strstr(temp,HOST_MATCH)!=NULL){
-                        for(k=0;temp[k];k++)
-                                {
-                                arr[k] = temp[k];
-                                }
-                                arr[k] = '\0';
-                for(i=29;arr[i]!=' ';i++)
-                {
-                        arr1[j] = arr[i];
-                        j++;
-                }
-                }
-                }
-                }
-                fclose(fp);
-                l=atoi(arr1);
-                l--;
-                return l;
-}
 
 
 
