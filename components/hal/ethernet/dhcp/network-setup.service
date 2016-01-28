@@ -1,0 +1,11 @@
+[Unit]
+Description=Networking Bridge Setup Script
+Requires=network-online.target
+After=com.cisco.spvtg.ccsp.CR.service
+
+[Service]
+ExecStart=/bin/sh /usr/bin/setup.sh &
+Type=forking
+
+[Install]
+WantedBy=multi-user.target

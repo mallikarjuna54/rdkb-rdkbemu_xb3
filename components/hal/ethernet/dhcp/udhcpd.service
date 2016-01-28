@@ -1,12 +1,11 @@
 [Unit]
 Description=udhcpd server 
-After=network.target lighttpd.service  com.cisco.spvtg.ccsp.PNM.service
+Requires= network-online.target network-setup.service
+After= network.target lighttpd.service network-setup.service
 
 [Service]
-ExecStart=/usr/bin/startudhcpd.sh eth1  
+ExecStart=/usr/sbin/udhcpd /etc/udhcpd.conf  
 Type=forking
 
 [Install]
 WantedBy=multi-user.target
-
-
