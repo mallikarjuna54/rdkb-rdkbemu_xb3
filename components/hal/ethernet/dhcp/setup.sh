@@ -6,60 +6,55 @@ brctl addbr brlan0
 count=`ifconfig | grep brlan0 | wc -l`
 echo "brlan-count=$count"
 
-while [ $count == 0 ]
-do
-   sleep 10
-   count=`ifconfig | grep brlan0 | wc -l`
-done
+sleep 5
+count=`ifconfig | grep brlan0 | wc -l`
+echo "brlan-count=$count"
+
+if [ $count != 0 ];then
+echo "brlan0 interface exists"
+fi
+
 
 count=`ifconfig | grep eth2 | wc -l`
 echo "eth2-count=$count"
 
-while [ $count == 0 ]
-do
-    sleep 10
-    count=`ifconfig | grep eth2 | wc -l`
-done
+sleep 5
+count=`ifconfig | grep eth2 | wc -l`
 
+if [ $count != 0 ];then
+echo "eth2 interface exists"
+ifconfig eth2 192.168.56.101 up
+fi
 
 
 count=`ifconfig | grep eth1 | wc -l`
 echo "eth1count=$count"
 
-while [ $count == 0 ]
-do
-    sleep 10
-    count=`ifconfig | grep eth1 | wc -l`
-done
+sleep 5
+count=`ifconfig | grep eth1 | wc -l`
 
-
-count=`ifconfig | grep wlan0 | wc -l`
-echo "wlan0count=$count"
-
-while [ $count == 0 ]
-do
-    sleep 10
-    count=`ifconfig | grep wlan0 | wc -l`
-done
-
-##############################################################
-##Setting IP Address For all interfaces 
-##############################################################
-
-ifconfig eth2 192.168.56.101 up
-
-
+if [ $count != 0 ];then
+echo "eth1 interface exists"
 ##### Add Wired Interface to Bridge interface ##############################
 ifconfig eth1 192.168.1.115 up
 brctl addif brlan0 eth1
+fi
 
+wifi=`ifconfig | grep wlan0 | wc -l`
+echo "wlan0count=$wifi"
 
+sleep 5
+wifi=`ifconfig | grep wlan0 | wc -l`
+
+if [ $wifi != 0 ];then
+echo "wlan0 interface exists"
 ######### Add Wireless interface to Bridge interface ######################
 ifconfig wlan0 192.168.1.120 up
 iw dev wlan0 set 4addr on
 brctl addif brlan0 wlan0
+fi
 
-
+if [ $count ] || [ $wifi ];then
 ########### Set ip Address for Bridge interface for udhcpd server##########
 INTERFACE=brlan0
 DEFAULT_IP_ADDRESS=192.168.7.1
@@ -84,3 +79,4 @@ rm -f wifi_clients.txt
 
 ###### Routing Table ##################################################### 
 sh iptables.sh 
+fi
