@@ -16,10 +16,6 @@
 #define DHCP_PID "> /tmp/pidof"
 #define DHCP_PATH "/tmp/pidof"
 #define DHCPv4_PID "pidof "
-#define FILE_NAME "/nmap.txt"
-#define HOSTS_MATCH "hosts up"
-#define HOST_MATCH "host up"
-#define INTERFACE "eth1"
 #define ULONG unsigned long
 
 
