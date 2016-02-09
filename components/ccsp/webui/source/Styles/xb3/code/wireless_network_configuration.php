@@ -1105,18 +1105,18 @@ function pair_cancel()
 		<th id="private-Blank" class="edit" width="10%">&nbsp;</th>
 	</tr>
 	<tr class="form-row odd">
-		<td headers="private-Name"><b><font color="black"><?php echo $network_name; ?></font></b></td>
-		<td headers="private-Frequency"><?php echo $feq_band; ?></td>
-		<td headers="private-MAC"><?php echo $mac_address; ?>   </td>
-		<td headers="private-Security"><?php echo encrypt_map($encrypt_mode, $encrypt_method);?></td>
+		<td headers="private-Name"><b><font color="black"><?php echo getStr("Device.WiFi.SSID.1.SSID"); ?></font></b></td>
+		<td headers="private-Frequency"><?php echo "2.4GHz"; ?></td>
+		<td headers="private-MAC"><?php echo getStr("Device.WiFi.SSID.1.BSSID"); ?>   </td>
+		<td headers="private-Security"><?php echo getStr("Device.WiFi.AccessPoint.1.Security.ModeEnabled");?></td>        
 		<td headers="private-Blank"><a href="wireless_network_configuration_edit.php?id=1" class="btn">Edit</a></td>
 	</tr>
 	<tr class="form-row">
 		<td headers="private-Name"><b><font color="black"><?php echo $network_name1; ?></font></b></td>
 		<td headers="private-Frequency"><?php echo $feq_band1; ?></td>
 		<td headers="private-MAC"><?php echo $mac_address1; ?>   </td>
-		<td headers="private-Security"><?php echo encrypt_map($encrypt_mode1, $encrypt_method1); ?></td>
-		<td headers="private-Blank"><a href="wireless_network_configuration_edit.php?id=2" class="btn">Edit</a></td>
+		<td headers="private-Security"><?php ?></td>
+		<td headers="private-Blank"></td>
 	</tr>
 	</table>
 	<div class="btn-group" style="display: none;">

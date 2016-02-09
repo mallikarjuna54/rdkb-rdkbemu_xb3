@@ -325,20 +325,9 @@ $(document).ready(function() {
 	<?php 
 	
 	function ProcessLay1Interface($interface){
-   
 		if (stristr($interface, "WiFi")){
-			if (stristr($interface, "WiFi.SSID.1")) {
-				$host['networkType'] = "Private";
-				$host['connectionType'] = "Wi-Fi 2.4G";
-			}
-			elseif (stristr($interface, "WiFi.SSID.2")) {
-				$host['networkType'] = "Private";
-				$host['connectionType'] = "Wi-Fi 5G";
-			}
-			else {
-				$host['networkType'] = "Public";
 				$host['connectionType'] = "Wi-Fi";
-			}
+				$host['networkType'] = "Private";
 		}
 		elseif (stristr($interface, "MoCA")) {
 			$host['connectionType'] = "MoCA";
@@ -415,7 +404,8 @@ $(document).ready(function() {
 			        	$onlinePrivateNetworkHost["$j"]['HostName'] = $Host["$i"]['HostName'];
 			        array_push($onlineHostNameArr, $onlinePrivateNetworkHost["$j"]['HostName']);
 
-                    $onlinePrivateNetworkHost["$j"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
+                    //$onlinePrivateNetworkHost["$j"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
+                    $onlinePrivateNetworkHost["$j"]['IPAddress'] = $Host["$i"]['IPAddress'];
                     $onlinePrivateNetworkHost["$j"]['IPv6Address1'] = $Host["$i"]['IPv6Address.1.IPAddress'];
                     $onlinePrivateNetworkHost["$j"]['IPv6Address2'] = $Host["$i"]['IPv6Address.2.IPAddress'];
 
@@ -452,7 +442,8 @@ $(document).ready(function() {
 			        else
 			        	$offlinePrivateNetworkHost["$k"]['HostName'] = $Host["$i"]['HostName'];
 
-                    $offlinePrivateNetworkHost["$k"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
+                   //LNT $offlinePrivateNetworkHost["$k"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
+                    $offlinePrivateNetworkHost["$k"]['IPAddress'] = $Host["$i"]['IPAddress'];
                     $offlinePrivateNetworkHost["$k"]['IPv6Address1'] = $Host["$i"]['IPv6Address.1.IPAddress'];
                     $offlinePrivateNetworkHost["$k"]['IPv6Address2'] = $Host["$i"]['IPv6Address.2.IPAddress'];
 
@@ -504,8 +495,8 @@ $(document).ready(function() {
 
 					<div class=\"device-info\">
 						<dl><dd><br/></dd>";
-
-						if ($onlinePrivateNetworkHost["$x"]['IPv4Address'] != '') {echo "<dd><b>IPV4 Address</b><br/>", $onlinePrivateNetworkHost["$x"]['IPv4Address'] , "</dd>";}
+						//LNT
+						if ($onlinePrivateNetworkHost["$x"]['IPAddress'] != '') {echo "<dd><b>IPV4 Address</b><br/>", $onlinePrivateNetworkHost["$x"]['IPAddress'] , "</dd>";}
 						if ($onlinePrivateNetworkHost["$x"]['IPv6Address2'] != '') {echo "<dd><b>IPV6 Address</b><br/>", $onlinePrivateNetworkHost["$x"]['IPv6Address2'] , "</dd>";}
 						if ($onlinePrivateNetworkHost["$x"]['IPv6Address1'] != '') {echo "<dd><b>Local Link IPV6 Address</b><br/>", $onlinePrivateNetworkHost["$x"]['IPv6Address1'] , "</dd>";}
 
@@ -572,8 +563,8 @@ $(document).ready(function() {
 
 				<div class=\"device-info\">
 					<dl><dd><br/></dd>";
-
-						if ($offlinePrivateNetworkHost["$x"]['IPv4Address'] != '') {echo "<dd><b>IPV4 Address</b><br/>", $offlinePrivateNetworkHost["$x"]['IPv4Address'] , "</dd>";}
+                                                //LNT
+						if ($offlinePrivateNetworkHost["$x"]['IPAddress'] != '') {echo "<dd><b>IPV4 Address</b><br/>", $offlinePrivateNetworkHost["$x"]['IPAddress'] , "</dd>";}
 						if ($offlinePrivateNetworkHost["$x"]['IPv6Address2'] != '') {echo "<dd><b>IPV6 Address</b><br/>", $offlinePrivateNetworkHost["$x"]['IPv6Address2'] , "</dd>";}
 						if ($offlinePrivateNetworkHost["$x"]['IPv6Address1'] != '') {echo "<dd><b>Local Link IPV6 Address</b><br/>", $offlinePrivateNetworkHost["$x"]['IPv6Address1'] , "</dd>";}
 

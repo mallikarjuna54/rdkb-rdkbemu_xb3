@@ -428,14 +428,17 @@ $(document).ready(function() {
 				//echo php_getstr("Device.WiFi.AccessPoint.2.Security.ModeEnabled");
 				$encrypt_mode	= php_getstr("Device.WiFi.AccessPoint.1.Security.ModeEnabled");
 				$encrypt_method	= php_getstr("Device.WiFi.AccessPoint.1.Security.X_CISCO_COM_EncryptionMethod");
-				echo encrypt_map($encrypt_mode, $encrypt_method);
+				//echo encrypt_map($encrypt_mode, $encrypt_method);
+				echo getStr("Device.WiFi.AccessPoint.1.Security.ModeEnabled");
+				echo "-";
+				echo getStr("Device.WiFi.AccessPoint.1.Security.X_CISCO_COM_EncryptionMethod");
 			?>
 			</span>
 		</div>
 
         <div class="form-row odd">
           <span class="readonlyLabel">No of Clients connected:</span> <span class="value">
-          <?php echo php_getstr("Device.WiFi.AccessPoint.1.AssociatedDeviceNumberOfEntries"); ?>
+          <?php echo php_getstr("Device.WiFi.AccessPoint.1.AssociatedDeviceNumberOfEntries"); ?> 
           </span>
         </div>
     </div><!-- end .module private wifi 2.4-->  
