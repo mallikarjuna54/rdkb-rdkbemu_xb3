@@ -113,7 +113,7 @@ if ($_SESSION['_DEBUG']){
 	$support_mode_5g 	= "a,n,ac";
 }
 
-if ("1-11"==$possible_channels)
+//if ("1-11"==$possible_channels)//LNT
 $possible_channels = "1,2,3,4,5,6,7,8,9,10,11";
 
 $security = "None";
@@ -636,12 +636,12 @@ function init_form()
 	}
 	
 	//for UI-4.0, remove some security options
-    if ("2.4"==radio_band){
-        $("#security").find("[value='None'],[value='WPA_PSK_TKIP'],[value='WPA_PSK_AES'],[value='WPA2_PSK_TKIP'],[value='WPA2_PSK_TKIPAES'],[value='WEP_64'],[value='WEP_128']").remove();
-    }
-    else{
-        $("#security").find("[value='None'],[value='WPA_PSK_TKIP'],[value='WPA_PSK_AES'],[value='WPA2_PSK_TKIP'],[value='WPA2_PSK_TKIPAES'],[value='WEP_64'],[value='WEP_128']").remove();
-    }
+    //if ("2.4"==radio_band){
+      //  $("#security").find("[value='None'],[value='WPA_PSK_TKIP'],[value='WPA_PSK_AES'],[value='WPA2_PSK_TKIP'],[value='WPA2_PSK_TKIPAES'],[value='WEP_64'],[value='WEP_128']").remove();
+   // }
+   // else{
+     //   $("#security").find("[value='None'],[value='WPA_PSK_TKIP'],[value='WPA_PSK_AES'],[value='WPA2_PSK_TKIP'],[value='WPA2_PSK_TKIPAES'],[value='WEP_64'],[value='WEP_128']").remove();
+   // }
 	
 	// for UI-4.0, add show-more
 	if ("1"==ssid_number || "2"==ssid_number) {

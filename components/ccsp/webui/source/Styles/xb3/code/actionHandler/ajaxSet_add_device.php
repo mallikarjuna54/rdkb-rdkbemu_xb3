@@ -23,25 +23,25 @@ function isIPValid($IP, $MAC){
         $msg = "This IP is reserved for Home Security!";
         $ret = FALSE;
     }     
-    elseif (strstr($LanSubMask, '255.255.255')) {
+/*    elseif (strstr($LanSubMask, '255.255.255')) {
         //the first three field should be equal to gw ip field
         if (($gwIP[0] != $hostIP[0]) || ($gwIP[1] != $hostIP[1]) || ($gwIP[2] != $hostIP[2])) {
            $msg = "Input IP is not in valid range:\n" . "$gwIP[0].$gwIP[1].$gwIP[2].[2~254]!";
            $ret = FALSE;
         }      
-    }
+    }*/
     elseif ($LanSubMask == '255.255.0.0') {
         if (($gwIP[0] != $hostIP[0]) || ($gwIP[1] != $hostIP[1])) {
            $msg = "Input IP is not in valid range:\n" . "$gwIP[0].$gwIP[1].[2~254].[2~254]!";
            $ret = FALSE;
         }      
     } 
-    else {
+/*    else {
         if ($gwIP[0] != $hostIP[0]) {
            $msg = "Input IP is not in valid range:\n [10.0.0.2 ~ 10.255.255.254]!";
            $ret = FALSE;
         } 
-    } 
+    }*/
 
     if ($ret) {
 		//if DHCP ==> ReservedIP, then check if DHCP with same MAC is there
@@ -61,13 +61,13 @@ function isIPValid($IP, $MAC){
         
 		//if above check pass, then check whether the IP have been used or not in Online DHCP/ReservedIP     
 		$idArr = explode(",", getInstanceIds("Device.Hosts.Host."));
-		foreach ($idArr as $key => $value) {
-			if ( !strcasecmp(getStr("Device.Hosts.Host.$value.IPv4Address.1.IPAddress"), $IP) ) {
-				$msg = "IP has already been reserved for another device.\nPlease try using another IP address!";
+	/*	foreach ($idArr as $key => $value) {
+			if ( !strcasecmp(getStr("Device.Hosts.Host.$value.1.IPAddress"), $IP) ) {
+				$msg = "IP has already been reserved for another..... device.\nPlease try using another IP address!";
 				$ret = FALSE;
 				break;
 			}
-		}
+		}*/
     
 		//if above check pass, then check whether the IP have been used or not in "Server Pool-1"
 		$idArr = explode(",", getInstanceIds("Device.DHCPv4.Server.Pool.1.StaticAddress."));
@@ -86,6 +86,9 @@ function isIPValid($IP, $MAC){
 $deviceInfo = json_decode($_REQUEST['DeviceInfo'], true);
 $result     = "";
 
+$macAddr = $deviceInfo['macAddress'];                                                 
+$ipAddr  = $deviceInfo['reseverd_ipAddr']; 
+$result = "success";        
 if( !array_key_exists('delFlag', $deviceInfo) ) {
 
     //key kelFlag is not exist, so this is to reserve a ip addr for host 

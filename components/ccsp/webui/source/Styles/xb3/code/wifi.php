@@ -38,7 +38,7 @@ function div_mod($n, $m)
 		<h2>Wi-Fi LAN port (2.4 GHZ)</h2>
 		<div class="form-row">
 			<span class="readonlyLabel">Wi-Fi link status:</span>
-			<span class="value"><?php echo ("true"==php_getstr("Device.WiFi.Radio.1.Enable"))?"Active":"Inactive";?></span>
+			<span class="value"><?php echo ("true"==php_getstr("Device.WiFi.SSID.1.Enable"))?"Active":"Inactive";?></span>
 		</div>
 		<div class="form-row odd">
 			<span class="readonlyLabel">MAC Address:</span>
@@ -64,7 +64,7 @@ function div_mod($n, $m)
 		<h2>Wi-Fi LAN port (5 GHZ)</h2>
 		<div class="form-row">
 			<span class="readonlyLabel">Wi-Fi link status:</span>
-			<span class="value"><?php echo ("true"==php_getstr("Device.WiFi.Radio.2.Enable"))?"Active":"Inactive";?></span>
+			<span class="value"><?php echo ("true"==php_getstr("Device.WiFi.SSID.2.Enable"))?"Active":"Inactive";?></span>
 		</div>
 		<div class="form-row odd">
 			<span class="readonlyLabel">MAC Address:</span>
