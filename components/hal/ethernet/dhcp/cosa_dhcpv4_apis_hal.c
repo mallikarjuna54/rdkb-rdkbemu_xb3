@@ -254,7 +254,7 @@ ULONG CcspHalNoofClientConnected()
 	FILE *fp = NULL;
 	ULONG total_reachable_clients = 0;
 	char str[512];
-	fp = popen("ip nei show | grep brlan0 | grep -w REACHABLE | wc -l","r");
+	fp = popen("ip nei show | grep brlan0 | grep -e REACHABLE -e STALE -e DELAY | wc -l","r");
 	if(fp == NULL)
 	{
 		printf("Failed to run command\n" );
