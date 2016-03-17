@@ -2,7 +2,6 @@
 #define __DHCPV4_EMU_API_H__
 
 
-
 #define GATEWAY 1
 #define SUBNET_MASK 2
 #define DHCP_STARTING_RANGE 4
@@ -17,7 +16,7 @@
 #define DHCP_PATH "/tmp/pidof"
 #define DHCPv4_PID "pidof "
 #define ULONG unsigned long
-
+#include <stdbool.h>
 
 typedef struct config_values
 {
@@ -60,8 +59,8 @@ int CcspHalGetPIDbyName(char* pidName);
 /* Getting number of client connected devices*/
 ULONG CcspHalNoofClientConnected();
 
-
-
+/*Checking the LAN Connection*/
+bool checkLan();
 
 #endif
 

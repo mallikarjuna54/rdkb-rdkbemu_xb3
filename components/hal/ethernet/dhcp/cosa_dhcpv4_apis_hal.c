@@ -5,7 +5,8 @@
 #include <sys/ioctl.h>
 #include <netinet/in.h>
 #include <net/if.h>
-#include<fcntl.h>
+#include <fcntl.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <arpa/inet.h>
 #include "ccsp_hal_dhcpv4_emu_api.h"
@@ -35,7 +36,6 @@ int CcspHalGetConfigValue(char *key, char *value, int size)
                 snprintf(value, size, "%s", ptr);
         close(fp);
         return 0;
-
 }
 
 /*Getting the dhcpv4 configuration(lease time)value */
@@ -253,7 +253,7 @@ ULONG CcspHalNoofClientConnected()
 {
 	FILE *fp = NULL;
 	ULONG total_reachable_clients = 0;
-	char str[512];
+	char str[FILE_SIZE];
 	fp = popen("ip nei show | grep brlan0 | grep -e REACHABLE -e STALE -e DELAY | wc -l","r");
 	if(fp == NULL)
 	{
@@ -265,5 +265,21 @@ ULONG CcspHalNoofClientConnected()
 	return total_reachable_clients;
 }
 
-
+/* To check the LAN Connection */
+bool checkLan()
+{
+	FILE *fp = NULL;
+	char path[FILE_SIZE];
+	int count = 0;
+	fp = popen ("ifconfig | grep eth1 | grep -v grep | wc -l","r");
+	if(fp == NULL)
+		return 0;
+	fgets(path,FILE_SIZE,fp);
+	count = atoi ( path );
+	pclose(fp);
+	if(count)
+		return true;
+	else
+		return false;
+}
 
