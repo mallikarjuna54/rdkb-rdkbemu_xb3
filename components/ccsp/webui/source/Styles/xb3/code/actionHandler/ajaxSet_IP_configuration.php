@@ -7,6 +7,7 @@ if(!array_key_exists('IPv6', $ip_config)){
 	setStr("Device.X_CISCO_COM_DeviceControl.LanManagementEntry.1.LanIPAddress", $ip_config['Ipaddr'], true);
 	setStr("Device.X_CISCO_COM_DeviceControl.LanManagementEntry.1.LanSubnetMask", $ip_config['Subnet_mask'], true);
 	
+
 	//20140523
 	//set LanManagementEntry_ApplySettings after change LanManagementEntry table
 	setStr("Device.X_CISCO_COM_DeviceControl.LanManagementEntry_ApplySettings", "true", true);
@@ -15,6 +16,9 @@ if(!array_key_exists('IPv6', $ip_config)){
 	setStr("Device.DHCPv4.Server.Pool.1.MaxAddress", $ip_config['Dhcp_end_addr'], false);
 	setStr("Device.DHCPv4.Server.Pool.1.LeaseTime" , $ip_config['Dhcp_lease_time'], true);
 
+	// Restart lighttpd
+	$output=shell-exec("killall lighttpd");
+	echo $output;
 }
 else{
 	//set ipv6 part

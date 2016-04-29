@@ -7,9 +7,15 @@
 <?php include('includes/nav.php'); ?>
 <?php
 $http_mode=getStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpEnable");
-$http_port=getStr("Device.X_CISCO_COM_DeviceControl.HTTPPort");
+
+//$http_port=getStr("Device.X_CISCO_COM_DeviceControl.HTTPPort");//LNT_EMU
+$http_port=getStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpPort");
+
 $https_mode=getStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpsEnable");
-$https_port=getStr("Device.X_CISCO_COM_DeviceControl.HTTPSPort");
+
+//$https_port=getStr("Device.X_CISCO_COM_DeviceControl.HTTPSPort");//LNT_EMU
+$https_port=getStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpsPort");
+
 $telnet_mode=getStr("Device.X_CISCO_COM_DeviceControl.TelnetEnable");
 $ssh_mode=getStr("Device.X_CISCO_COM_DeviceControl.SSHEnable");
 ?>
@@ -31,8 +37,10 @@ $(document).ready(function() {
 	comcast.page.init("Advanced > Remote Management", "nav-remote-management");
 
 	var HTTP = <?php echo ($http_mode === 'true' ? "true" : "false"); ?>;
+	
 	var HTTPPORT = "<?php echo $http_port;?>";
 	var HTTPS = <?php echo ($https_mode === 'true' ? "true" : "false"); ?>;
+
 	var HTTPSPORT = "<?php echo $https_port;?>";
 	var TELNET = <?php echo ($telnet_mode === 'true' ? "true" : "false"); ?>;
 	var SSH = <?php echo ($ssh_mode === 'true' ? "true" : "false"); ?>;
@@ -513,7 +521,6 @@ $(".btn").click(function(){
 
 	var http_enabled  = $("#http_switch").radioswitch("getState").on;
 	var https_enabled = $("#https_switch").radioswitch("getState").on;
-
 	if(http_enabled || https_enabled){
 		if ($(":radio[value='single']").prop("checked")){
 			if (IsBlank("ip_address_") && IsBlank("ipv6_address_")){
@@ -574,11 +581,12 @@ $(".btn").click(function(){
 		if (!isValid) return;
 	}
 
-	if ($("#telnet1_switch").radioswitch("getState").on && $("#ssh1_switch").radioswitch("getState").on)
+//LNT_EMU
+	/*if ($("#telnet1_switch").radioswitch("getState").on && $("#ssh1_switch").radioswitch("getState").on)
 	{
 		jAlert("Telnet and SSH can not be enabled at the same time.\r\nPlease disable at least one of them.");
 		return;
-	}
+	}*/
 	
 	var telnet = $("#telnet1_switch").radioswitch("getState").on;
 	if (TELNET==telnet) telnet="notset";
@@ -596,6 +604,9 @@ $(".btn").click(function(){
 	var httpsport=$('#https').val();
 	// if (HTTPSPORT==httpsport || HTTPS=="false") httpsport="notset";
 	if (HTTPSPORT==httpsport) httpsport="notset";
+
+ 	var HTTP = $("#http_switch").radioswitch("getState").on;
+ 	var HTTPS = $("#https_switch").radioswitch("getState").on;
 
 	if(!HTTP && !HTTPS){
 		allowtype	="notset";
@@ -662,22 +673,24 @@ $(".btn").click(function(){
 		var endIP_Compare=$("#endip_address_1").val()+"."+$("#endip_address_2").val()+"."+$("#endip_address_3").val()+"."+$("#endip_address_4").val();
 
 		if(allowtype_Compare == "single"){
-			if( (snetCal.toDeci(startIP_single) > snetCal.toDeci(ipv4_rlow)) && (snetCal.toDeci(startIP_single) < snetCal.toDeci(ipv4_rhigh)) ){
+			if( (snetCal.toDeci(startIP_single) < snetCal.toDeci(ipv4_rlow)) && (snetCal.toDeci(startIP_single) > snetCal.toDeci(ipv4_rhigh)) ){
 				jAlert("Invalid IPv4 Address.");
 				return;
 			}
 		}else if(allowtype_Compare == "range"){
-			if( (snetCal.toDeci(startIP_Compare) > snetCal.toDeci(ipv4_rlow)) && (snetCal.toDeci(startIP_Compare) < snetCal.toDeci(ipv4_rhigh)) ){
+			if( (snetCal.toDeci(startIP_Compare) < snetCal.toDeci(ipv4_rlow)) && (snetCal.toDeci(startIP_Compare) > snetCal.toDeci(ipv4_rhigh)) ){
 				jAlert("Invalid IPv4 Start Address.");
 				return;
 			}
-			if( (snetCal.toDeci(endIP_Compare) > snetCal.toDeci(ipv4_rlow)) && (snetCal.toDeci(endIP_Compare) < snetCal.toDeci(ipv4_rhigh)) ){
+			if( (snetCal.toDeci(endIP_Compare) < snetCal.toDeci(ipv4_rlow)) && (snetCal.toDeci(endIP_Compare) > snetCal.toDeci(ipv4_rhigh)) ){
 				jAlert("Invalid IPv4 End Address.");
 				return;
 			}
 				
 		}
 	}
+	
+
 
 	// if($("#pageForm").valid()) {	
 		jProgress('This will take several seconds!', 60);
@@ -706,6 +719,27 @@ $(".btn").click(function(){
 				}, 15000);
 			}
 		});
+		 $.ajax({                                                                                                             
+                        type:"POST",                                                                                                 
+                        url:"actionHandler/ajax_lighttpd.php",                                                              
+                        data:{},                                        
+                        success:function(){                                                                                          
+                                setTimeout(function(){                                                                               
+                                        jHide();                                                                                     
+                                    window.location.href="remote_management.php";                                                    
+                                }, 15000);                                                                                           
+                        },                                                                                                           
+                        error:function(){                                                                                            
+                                setTimeout(function(){                                                                               
+                                        jHide();                                                                                     
+                                        /*if (http!="notset" && httpport!="notset") {                                                
+                                                jAlert("Something wrong, please try later!");                                        
+                                        } else {                                                                                     
+                                                window.location.href="remote_management.php";                                        
+                                        }*/                                                                                          
+                                }, 15000);                                                                                           
+                        }                                                                                                            
+                });           
 	// }
 });
 
