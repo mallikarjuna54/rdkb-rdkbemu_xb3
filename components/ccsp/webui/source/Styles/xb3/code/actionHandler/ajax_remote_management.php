@@ -11,12 +11,18 @@ function array_trim($arr){
 	return $ret;
 }
 
+
+
 if ($_POST['telnet']!="notset")		setStr("Device.X_CISCO_COM_DeviceControl.TelnetEnable",$_POST['telnet'],true);
 if ($_POST['ssh']!="notset")		setStr("Device.X_CISCO_COM_DeviceControl.SSHEnable",$_POST['ssh'],true);
 
 if ($_POST['allowtype']!="notset")	setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.FromAnyIP",$_POST['allowtype'],true);
 if ($_POST['startIP']!="notset")	setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.StartIp",$_POST['startIP'],true);
 if ($_POST['endIP']!="notset")		setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.EndIp",$_POST['endIP'],true);
+
+
+
+
 /*
 if ($_POST['startIP']!="notset" || $_POST['endIP']!="notset"){
 	$dat = array();
@@ -52,11 +58,22 @@ if ($_POST['mso_mgmt']!="notset")	setStr("Device.X_CISCO_COM_DeviceControl.Enabl
 if ($_POST['cus_mgmt']!="notset")	setStr("Device.X_CISCO_COM_DeviceControl.EnableCusadminRemoteMgmt",$_POST['cus_mgmt'],true);
 
 // put change port at the end of this script
-if ($_POST['https']!="notset")		setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpsEnable",$_POST['https'],true);
+/*if ($_POST['https']!="notset")		setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpsEnable",$_POST['https'],true);
 if ($_POST['httpsport']!="notset")	setStr("Device.X_CISCO_COM_DeviceControl.HTTPSPort",$_POST['httpsport'],true);
 if ($_POST['http']!="notset")		setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpEnable",$_POST['http'],true);
-if ($_POST['httpport']!="notset")	setStr("Device.X_CISCO_COM_DeviceControl.HTTPPort",$_POST['httpport'],true);
+if ($_POST['httpport']!="notset")	setStr("Device.X_CISCO_COM_DeviceControl.HTTPPort",$_POST['httpport'],true);*/
 
-// sleep(10);
+
+
+if ($_POST['https']!="notset")          setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpsEnable",$_POST['https'],true);
+if ($_POST['httpsport'] !="notset")     setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpsPort",$_POST['httpsport'],true);
+
+
+
+if ($_POST['http']!="notset")           setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpEnable",$_POST['http'],true); 
+if ($_POST['httpport']!="notset")       setStr("Device.UserInterface.X_CISCO_COM_RemoteAccess.HttpPort",$_POST['httpport'],true);
+
+
+
 
 ?>
