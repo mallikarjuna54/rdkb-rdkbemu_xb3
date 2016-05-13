@@ -18,7 +18,6 @@ if($isEnabledDMZ == "true") {
 	$paramArray = 
 		array (
 			array($rootObjName."InternalIP", "string", $ip),
-			array($rootObjName."IPv6Host", "string", $hostv6),
 			array($rootObjName."Enable", "bool", $isEnabledDMZ)
 		);
 	$retStatus = DmExtSetStrsWithRootObj($rootObjName, TRUE, $paramArray);	
