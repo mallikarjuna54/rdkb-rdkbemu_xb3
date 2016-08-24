@@ -187,8 +187,8 @@ else if ("mac_ssid" == $arConfig['target'])
 	$k=1;
 	for ($j=0; $j<count($id); $j++)
 	{
-		$ft[$j][0] = getStr("Device.WiFi.AccessPoint.$i.X_CISCO_COM_MacFilterTable.$id[$k].DeviceName");
-		$ft[$j][1] = getStr("Device.WiFi.AccessPoint.$i.X_CISCO_COM_MacFilterTable.$id[$k].MACAddress");
+		$ft[$j][0] = getStr("Device.WiFi.AccessPoint.$i.X_CISCO_COM_MacFilterTable.$k.DeviceName");
+		$ft[$j][1] = getStr("Device.WiFi.AccessPoint.$i.X_CISCO_COM_MacFilterTable.$k.MACAddress");
 		$k++;
 	}
 	
