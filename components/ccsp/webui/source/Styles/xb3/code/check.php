@@ -85,8 +85,7 @@
         }
         elseif ($_POST["username"] == "admin")
 		{
-		//	$curPwd3 = getStr("Device.Users.User.3.X_CISCO_COM_Password");
-			$curPwd3 = "password";
+			$curPwd3 = getStr("Device.Users.User.3.X_CISCO_COM_Password");
 			if ($_POST["password"] == $curPwd3) 
             {
 				if ( !innerIP($client_ip) && (if_type($server_ip)!="rg_ip") )
