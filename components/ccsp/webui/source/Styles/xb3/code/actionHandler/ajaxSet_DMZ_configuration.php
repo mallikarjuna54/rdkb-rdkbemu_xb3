@@ -4,7 +4,6 @@
 
 $dmzInfo = json_decode($_REQUEST['dmzInfo'], true);
 
-//var_dump($dmzInfo);
 //echo $dmzInfo['IsEnabled'];
 //echo "<br />";
 

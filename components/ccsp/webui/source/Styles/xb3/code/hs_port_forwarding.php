@@ -185,7 +185,6 @@ $(document).ready(function() {
 							),
 					 );
 				}
-				//dump($resArray);
 
 				if(!empty($resArray)){
 

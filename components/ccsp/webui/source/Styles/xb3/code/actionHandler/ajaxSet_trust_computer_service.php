@@ -2,7 +2,6 @@
 
 $flag = json_decode($_REQUEST['TrustFlag'], true);
 
-//var_dump($flag);
 
 if( $flag['trustFlag'] == "true" ){
     // "no" => "yes"

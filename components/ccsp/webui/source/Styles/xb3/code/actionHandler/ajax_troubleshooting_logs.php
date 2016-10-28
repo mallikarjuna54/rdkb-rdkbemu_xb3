@@ -26,7 +26,6 @@ function str2time($str){
 			$time['firewall_time']  = date("Y")-1 .'/'. $MONTH[$timeTmp[0]] .'/'. $timeTmp[1] .' '. $timeTmp[2]; 
 		}
 	}
-	//var_dump($time);
 	return $time;
 }
 
@@ -86,7 +85,6 @@ if ($mode=="system"){
 	// array_pop($Log);	
 	
 	$sysLog = array_reverse($Log);
-	//dump($sysLog);
 	
 	$fh=fopen("/var/tmp/troubleshooting_logs_".$mode."_".$timef.".txt","w");
 	foreach ($sysLog as $key=>$value){
