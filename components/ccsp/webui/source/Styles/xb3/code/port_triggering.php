@@ -181,7 +181,6 @@ $(document).ready(function() {
 			if (getStr("Device.NAT.X_CISCO_COM_PortTriggers.TriggerNumberOfEntries")==0) {}
 			else{
 			$PTIDs=explode(",",getInstanceIDs("Device.NAT.X_CISCO_COM_PortTriggers.Trigger."));
-			//var_dump(count($PTIDs));
 			$iclass="even";
 			foreach ($PTIDs as $key=>$i) {
 				if ($iclass=="even") {$iclass="odd";} else {$iclass="even";}

@@ -4,7 +4,6 @@
 
 $qosInfo = json_decode($_REQUEST['qosInfo'], true);
 
-//var_dump($ddnsInfo);
 
 $APIDs=explode(",",getInstanceIDs("Device.WiFi.AccessPoint."));
 for($i=0;$i<count($APIDs);$i++)

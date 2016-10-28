@@ -369,7 +369,6 @@ $(document).ready(function() {
 
 		if(!empty($Host)){
 			
-			//dump($Host);
 
 			//check if online device is there in Blocked Devices List using MAC Address
 			//if it's there remove 'X' button for "Online Blocked Devices"
@@ -465,7 +464,6 @@ $(document).ready(function() {
 		}//end of if empty host
 	}//end of if empty hostNums
 
-//dump($onlinePrivateNetworkHost);    
 
     if ("" == $onlinePrivateNetworkHost['hostNum']) $onlinePrivateNetworkHost['hostNum']=0;
 
@@ -658,7 +656,6 @@ $(document).ready(function() {
 				$PoolClientArr[$k] = array_merge($entry, array('IPv4Address' => getStr("Device.DHCPv4.Server.Pool.2.Client.".$entry['__id'].".IPv4Address.1.IPAddress")));
 
 			}
-			//dump($PoolClientArr);
 
 			$ids = explode(",",getInstanceIDs("Device.WiFi.AccessPoint.3.AssociatedDevice."));
 			//MACAddress, SignalStrength, Active
@@ -684,7 +681,6 @@ $(document).ready(function() {
 					),
 				);
 			}
-			//dump($AssoDeviceArr);
 
 			$onXHSClientArr  = array();
 			$onXHSAssoDeviceArr  = array();
@@ -709,8 +705,6 @@ $(document).ready(function() {
 			//foreach ($offXHSArr as $offDevice) {
 			//	array_push($offXHSClientArr, $offDevice);
 			//}
-			//dump($onXHSClientArr);
-			//dump($offXHSClientArr); 
 
 			$onXHS_clients_num = count($onXHSClientArr);
 			$offXHS_clients_num = count($offXHSClientArr);
@@ -929,7 +923,6 @@ $(document).ready(function() {
 <?php 
 
 //this part is to populate edit device info on each online private network host basis 
-//dump ($onlinePrivateNetworkHost);
 
 for ($i=0; $i < $onlinePrivateNetworkHost['hostNum']; $i++) { 
 

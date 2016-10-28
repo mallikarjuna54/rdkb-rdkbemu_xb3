@@ -59,9 +59,6 @@ for ($i=0; !feof($file); ) {
 	if (feof($file)) break;					//PHP read last line will return false, not EOF!
 	
 	$timeU = strtotime($time);
-	// dump('timeU = '. $timeU);
-	// dump('mintime = '. $mintime);
-	// dump('maxtime = '. $maxtime);
 
 	if ($timeU > $maxtime || $timeU < $mintime) continue;	//only store the needed line
 
@@ -80,7 +77,6 @@ fclose($file);
 
 $firewall_log = array_reverse($Log);
 // echo "firewall log ...: \n";
-// var_dump($firewall_log);
 	
 $fh=fopen("/var/tmp/parental_reports_".$mode."_".$timef.".txt","w");
 foreach ($firewall_log as $key=>$value){

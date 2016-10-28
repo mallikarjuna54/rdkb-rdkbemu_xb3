@@ -4,7 +4,6 @@
 
 $upnpInfo = json_decode($_REQUEST['upnpInfo'], true);
 
-//var_dump($upnpInfo);
 //echo $ddnsInfo['IsEnabled'];
 //echo "<br />";
 

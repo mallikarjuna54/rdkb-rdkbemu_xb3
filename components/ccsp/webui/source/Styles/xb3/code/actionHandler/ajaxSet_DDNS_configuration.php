@@ -5,17 +5,6 @@
 
 $ddnsInfo = json_decode($_REQUEST['ddnsInfo'], true);
 
-//var_dump($ddnsInfo);
-//echo $ddnsInfo['Index'];
-//echo $ddnsInfo['IsEnabled'];
-//echo "<br />";
-//echo $ddnsInfo['SpName'];
-//echo "<br />";
-//echo $ddnsInfo['User'];
-//echo "<br />";
-//echo $ddnsInfo['Passwd'];
-
-//$index = $ddnsInfo['Index'];;
 $index = 1;
 $isEnabled = $ddnsInfo['IsEnabled'];
 $spName = $ddnsInfo['SpName'];
