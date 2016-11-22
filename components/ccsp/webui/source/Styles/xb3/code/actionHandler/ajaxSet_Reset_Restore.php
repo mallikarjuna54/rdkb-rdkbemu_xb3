@@ -53,13 +53,13 @@ switch ($infoArray[0]) {
 	case "btn4" :
 		$ret["wifi"] = true;
 		echo json_encode($ret);
-		delMacFilterTable("1 2");
-		//setStr("Device.X_CISCO_COM_DeviceControl.FactoryReset", $infoArray[1],true);
+		//delMacFilterTable("1 2");
+		setStr("Device.X_CISCO_COM_DeviceControl.FactoryReset", $infoArray[1],true);
 		//when restore, radio can be restart, but also need to force it when no change
 		//setStr("Device.WiFi.X_CISCO_COM_ResetRadios", "true", true);
-		setStr("Device.WiFi.X_CISCO_COM_FactoryResetRadioAndAp", "1,2;1,2",true);	//radio 1, radio 2; Ap 1, Ap 2
+		//setStr("Device.WiFi.X_CISCO_COM_FactoryResetRadioAndAp", "1,2;1,2",true);	//radio 1, radio 2; Ap 1, Ap 2
 		//For WECB
-		setStr("Device.MoCA.X_CISCO_COM_WiFi_Extender.X_CISCO_COM_SSID_Updated", "true", true);
+		//setStr("Device.MoCA.X_CISCO_COM_WiFi_Extender.X_CISCO_COM_SSID_Updated", "true", true);
 		exit(0);
 	case "FactoryResetRadioAndAp" :
 		$ret["wifi"] = true;
@@ -77,6 +77,21 @@ switch ($infoArray[0]) {
 	case "btn5" :
 		$ret["reboot"] = true;
 		echo json_encode($ret);
+		//setStr("Device.X_CISCO_COM_DeviceControl.FactoryReset", $infoArray[1],true);
+		                if ("mso"==$thisUser) {                                                      
+                        setStr("Device.Users.User.1.X_CISCO_COM_Password", "pod", true);     
+                        setStr("Device.Users.User.3.X_CISCO_COM_Password", "password", true);                                 
+                        echo "mso";                                                          
+                }                                                                              
+                elseif ("cusadmin"==$thisUser) {                                             
+                        setStr("Device.Users.User.2.X_CISCO_COM_Password", "Xfinity", true);   
+                        setStr("Device.Users.User.3.X_CISCO_COM_Password", "password", true);             
+                        echo "cusadmin";                                                     
+                }                                                                            
+                else {                                                                       
+                        setStr("Device.Users.User.3.X_CISCO_COM_Password", "password", true);
+                        echo "admin";  
+                }      
 		setStr("Device.X_CISCO_COM_DeviceControl.FactoryReset", $infoArray[1],true);
 		exit(0);
 	case "btn6" :
