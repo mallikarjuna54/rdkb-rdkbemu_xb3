@@ -61,13 +61,13 @@ function isIPValid($IP, $MAC){
         
 		//if above check pass, then check whether the IP have been used or not in Online DHCP/ReservedIP     
 		$idArr = explode(",", getInstanceIds("Device.Hosts.Host."));
-	/*	foreach ($idArr as $key => $value) {
-			if ( !strcasecmp(getStr("Device.Hosts.Host.$value.1.IPAddress"), $IP) ) {
+		foreach ($idArr as $key => $value) {
+			if ( !strcasecmp(getStr("Device.Hosts.Host.$value.IPAddress"), $IP) ) {
 				$msg = "IP has already been reserved for another..... device.\nPlease try using another IP address!";
 				$ret = FALSE;
 				break;
 			}
-		}*/
+		}
     
 		//if above check pass, then check whether the IP have been used or not in "Server Pool-1"
 		$idArr = explode(",", getInstanceIds("Device.DHCPv4.Server.Pool.1.StaticAddress."));
