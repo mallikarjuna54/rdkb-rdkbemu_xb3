@@ -347,7 +347,7 @@ $(document).ready(function() {
 
 	$rootObjName    = "Device.Hosts.Host.";
 	$paramNameArray = array("Device.Hosts.Host.");
-	$mapping_array  = array("PhysAddress", "IPAddress", "Layer1Interface", "HostName", "Active", "AddressSource", "X_CISCO_COM_RSSI", "Comments", "IPv4Address.1.IPAddress", "IPv6Address.1.IPAddress", "IPv6Address.2.IPAddress");
+	$mapping_array  = array("PhysAddress", "IPAddress", "Layer1Interface", "HostName", "Active", "AddressSource", "X_CISCO_COM_RSSI", "Comments", "IPAddress", "IPv6Address.1.IPAddress", "IPv6Address.2.IPAddress");
 
 	$HostIndexArr = DmExtGetInstanceIds("Device.Hosts.Host.");
 	if(0 == $HostIndexArr[0]){  
@@ -404,7 +404,7 @@ $(document).ready(function() {
 			        array_push($onlineHostNameArr, $onlinePrivateNetworkHost["$j"]['HostName']);
 
                     //$onlinePrivateNetworkHost["$j"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
-                    $onlinePrivateNetworkHost["$j"]['IPAddress'] = $Host["$i"]['IPAddress'];
+                    $onlinePrivateNetworkHost["$j"]['IPv4Address'] = $Host["$i"]['IPAddress'];
                     $onlinePrivateNetworkHost["$j"]['IPv6Address1'] = $Host["$i"]['IPv6Address.1.IPAddress'];
                     $onlinePrivateNetworkHost["$j"]['IPv6Address2'] = $Host["$i"]['IPv6Address.2.IPAddress'];
 
@@ -442,7 +442,7 @@ $(document).ready(function() {
 			        	$offlinePrivateNetworkHost["$k"]['HostName'] = $Host["$i"]['HostName'];
 
                    //LNT $offlinePrivateNetworkHost["$k"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
-                    $offlinePrivateNetworkHost["$k"]['IPAddress'] = $Host["$i"]['IPAddress'];
+                    $offlinePrivateNetworkHost["$k"]['IPv4Address'] = $Host["$i"]['IPAddress'];
                     $offlinePrivateNetworkHost["$k"]['IPv6Address1'] = $Host["$i"]['IPv6Address.1.IPAddress'];
                     $offlinePrivateNetworkHost["$k"]['IPv6Address2'] = $Host["$i"]['IPv6Address.2.IPAddress'];
 
