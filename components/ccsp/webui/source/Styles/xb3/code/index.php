@@ -512,12 +512,15 @@ function f()
 				$ids = explode(",", getInstanceIds("Device.Ethernet.Interface."));
 				$ethEnable = false;
 
-				foreach ($ids as $i){
+			      /*foreach ($ids as $i){
 					if ("true" == getStr("Device.Ethernet.Interface.".$i.".Enable")){
 						$ethEnable = true;
 						break;
 					}
-				}
+				}*/
+				if ("true" == getStr("Device.Ethernet.Interface.1.Enable")){
+						$ethEnable = true;
+				}//RDKB-EMULATOR
 
 				if ($ethEnable) {
 					echo "<div class=\"form-row\"><span class=\"on-off sprite_cont\"><img src=\"./cmn/img/icn_on_off.png\" alt='Ethernet On' /></span> <span class=\"readonlyLabel\">Ethernet</span></div>";
