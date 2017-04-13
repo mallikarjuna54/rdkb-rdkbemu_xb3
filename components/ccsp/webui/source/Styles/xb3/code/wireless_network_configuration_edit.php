@@ -114,7 +114,10 @@ if ($_SESSION['_DEBUG']){
 }
 
 //if ("1-11"==$possible_channels)//LNT
-$possible_channels = "1,2,3,4,5,6,7,8,9,10,11";
+if ("2.4"==$radio_band)
+	$possible_channels = "1,2,3,4,5,6,7,8,9,10,11";
+if ("5"==$radio_band)
+	$possible_channels = "36,40,44,48,149,153,157,161,165";
 
 $security = "None";
 if ("WEP-64" == $encrypt_mode){

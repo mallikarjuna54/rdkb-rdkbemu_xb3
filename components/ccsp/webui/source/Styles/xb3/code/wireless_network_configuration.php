@@ -1111,6 +1111,14 @@ function pair_cancel()
 		<td headers="private-Security"><?php echo getStr("Device.WiFi.AccessPoint.1.Security.ModeEnabled");?></td>        
 		<td headers="private-Blank"><a href="wireless_network_configuration_edit.php?id=1" class="btn">Edit</a></td>
 	</tr>
+	</tr>
+	<tr class="form-row odd">
+		<td headers="private-Name"><b><font color="black"><?php echo getStr("Device.WiFi.SSID.2.SSID"); ?></font></b></td>
+		<td headers="private-Frequency"><?php echo "5GHz"; ?></td>
+		<td headers="private-MAC"><?php echo getStr("Device.WiFi.SSID.2.BSSID"); ?>   </td>
+		<td headers="private-Security"><?php echo getStr("Device.WiFi.AccessPoint.2.Security.ModeEnabled");?></td>        
+		<td headers="private-Blank"><a href="wireless_network_configuration_edit.php?id=2" class="btn">Edit</a></td>
+	</tr>
 	<tr class="form-row">
 		<td headers="private-Name"><b><font color="black"><?php echo $network_name1; ?></font></b></td>
 		<td headers="private-Frequency"><?php echo $feq_band1; ?></td>
