@@ -326,8 +326,19 @@ $(document).ready(function() {
 	
 	function ProcessLay1Interface($interface){
 		if (stristr($interface, "WiFi")){
-				$host['connectionType'] = "Wi-Fi";
-				$host['networkType'] = "Private";
+			if (stristr($interface, "WiFi.SSID.1")) {
+                                $host['networkType'] = "Private";
+                                $host['connectionType'] = "Wi-Fi 2.4G";
+                        }
+                        elseif (stristr($interface, "WiFi.SSID.2")) {
+                                $host['networkType'] = "Private";
+                                $host['connectionType'] = "Wi-Fi 5G";
+                        }
+                        else {
+                                $host['networkType'] = "Public";
+                                $host['connectionType'] = "Wi-Fi";
+                        }
+
 		}
 		elseif (stristr($interface, "MoCA")) {
 			$host['connectionType'] = "MoCA";
@@ -494,7 +505,7 @@ $(document).ready(function() {
 					<div class=\"device-info\">
 						<dl><dd><br/></dd>";
 						//LNT
-						if ($onlinePrivateNetworkHost["$x"]['IPAddress'] != '') {echo "<dd><b>IPV4 Address</b><br/>", $onlinePrivateNetworkHost["$x"]['IPAddress'] , "</dd>";}
+						if ($onlinePrivateNetworkHost["$x"]['IPv4Address'] != '') {echo "<dd><b>IPV4 Address</b><br/>", $onlinePrivateNetworkHost["$x"]['IPv4Address'] , "</dd>";}
 						if ($onlinePrivateNetworkHost["$x"]['IPv6Address2'] != '') {echo "<dd><b>IPV6 Address</b><br/>", $onlinePrivateNetworkHost["$x"]['IPv6Address2'] , "</dd>";}
 						if ($onlinePrivateNetworkHost["$x"]['IPv6Address1'] != '') {echo "<dd><b>Local Link IPV6 Address</b><br/>", $onlinePrivateNetworkHost["$x"]['IPv6Address1'] , "</dd>";}
 
@@ -562,7 +573,7 @@ $(document).ready(function() {
 				<div class=\"device-info\">
 					<dl><dd><br/></dd>";
                                                 //LNT
-						if ($offlinePrivateNetworkHost["$x"]['IPAddress'] != '') {echo "<dd><b>IPV4 Address</b><br/>", $offlinePrivateNetworkHost["$x"]['IPAddress'] , "</dd>";}
+						if ($offlinePrivateNetworkHost["$x"]['IPv4Address'] != '') {echo "<dd><b>IPV4 Address</b><br/>", $offlinePrivateNetworkHost["$x"]['IPv4Address'] , "</dd>";}
 						if ($offlinePrivateNetworkHost["$x"]['IPv6Address2'] != '') {echo "<dd><b>IPV6 Address</b><br/>", $offlinePrivateNetworkHost["$x"]['IPv6Address2'] , "</dd>";}
 						if ($offlinePrivateNetworkHost["$x"]['IPv6Address1'] != '') {echo "<dd><b>Local Link IPV6 Address</b><br/>", $offlinePrivateNetworkHost["$x"]['IPv6Address1'] , "</dd>";}
 
