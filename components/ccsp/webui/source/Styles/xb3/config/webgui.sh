@@ -36,6 +36,12 @@ cp /etc/lighttpd.conf /var
 #sed -i "s/^server.port.*/server.port = $HTTP_PORT/" /var/lighttpd.conf
 #sed -i "s#^\$SERVER\[.*\].*#\$SERVER[\"socket\"] == \":$HTTPS_PORT\" {#" /var/lighttpd.conf
 
+HTTP_SECURITY_HEADER_ENABLE=`syscfg get HTTPSecurityHeaderEnable`
+
+if [ "$HTTP_SECURITY_HEADER_ENABLE" = "true" ]; then
+        echo "setenv.add-response-header = (\"X-Frame-Options\" => \"deny\",\"X-XSS-Protection\" => \"1; mode=block\",\"X-Content-Type-Options\" => \"nosniff\",\"Content-Security-Policy\" => \"img-src 'self'; font-src 'self'; form-action 'self';\")"  >> /var/lighttpd.conf
+fi
+
 echo "server.port = $HTTP_ADMIN_PORT" >> /var/lighttpd.conf
 echo "server.bind = \"$INTERFACE\"" >> /var/lighttpd.conf
 echo "\$SERVER[\"socket\"] == \"wan0:80\" { server.use-ipv6 = \"enable\" }" >> /var/lighttpd.conf
