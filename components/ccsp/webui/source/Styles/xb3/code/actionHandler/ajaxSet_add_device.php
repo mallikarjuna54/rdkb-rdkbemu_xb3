@@ -62,7 +62,7 @@ function isIPValid($IP, $MAC){
 		//if above check pass, then check whether the IP have been used or not in Online DHCP/ReservedIP     
 		$idArr = explode(",", getInstanceIds("Device.Hosts.Host."));
 		foreach ($idArr as $key => $value) {
-			if ( !strcasecmp(getStr("Device.Hosts.Host.$value.IPAddress"), $IP) ) {
+			if ( !strcasecmp(getStr("Device.Hosts.Host.$value.IPv4Address.1.IPAddress"), $IP) ) {
 				$msg = "IP has already been reserved for another..... device.\nPlease try using another IP address!";
 				$ret = FALSE;
 				break;
