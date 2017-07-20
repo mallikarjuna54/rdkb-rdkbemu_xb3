@@ -414,8 +414,8 @@ $(document).ready(function() {
 			        	$onlinePrivateNetworkHost["$j"]['HostName'] = $Host["$i"]['HostName'];
 			        array_push($onlineHostNameArr, $onlinePrivateNetworkHost["$j"]['HostName']);
 
-                    //$onlinePrivateNetworkHost["$j"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
-                    $onlinePrivateNetworkHost["$j"]['IPv4Address'] = $Host["$i"]['IPAddress'];
+                    $onlinePrivateNetworkHost["$j"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
+                    //$onlinePrivateNetworkHost["$j"]['IPv4Address'] = $Host["$i"]['IPAddress'];
                     $onlinePrivateNetworkHost["$j"]['IPv6Address1'] = $Host["$i"]['IPv6Address.1.IPAddress'];
                     $onlinePrivateNetworkHost["$j"]['IPv6Address2'] = $Host["$i"]['IPv6Address.2.IPAddress'];
 
@@ -452,8 +452,8 @@ $(document).ready(function() {
 			        else
 			        	$offlinePrivateNetworkHost["$k"]['HostName'] = $Host["$i"]['HostName'];
 
-                   //LNT $offlinePrivateNetworkHost["$k"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
-                    $offlinePrivateNetworkHost["$k"]['IPv4Address'] = $Host["$i"]['IPAddress'];
+                    $offlinePrivateNetworkHost["$k"]['IPv4Address'] = $Host["$i"]['IPv4Address.1.IPAddress'];
+                    //LNT $offlinePrivateNetworkHost["$k"]['IPv4Address'] = $Host["$i"]['IPAddress'];
                     $offlinePrivateNetworkHost["$k"]['IPv6Address1'] = $Host["$i"]['IPv6Address.1.IPAddress'];
                     $offlinePrivateNetworkHost["$k"]['IPv6Address2'] = $Host["$i"]['IPv6Address.2.IPAddress'];
 
