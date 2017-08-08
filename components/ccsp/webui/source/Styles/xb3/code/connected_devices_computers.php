@@ -358,7 +358,7 @@ $(document).ready(function() {
 
 	$rootObjName    = "Device.Hosts.Host.";
 	$paramNameArray = array("Device.Hosts.Host.");
-	$mapping_array  = array("PhysAddress", "IPAddress", "Layer1Interface", "HostName", "Active", "AddressSource", "X_CISCO_COM_RSSI", "Comments", "IPAddress", "IPv6Address.1.IPAddress", "IPv6Address.2.IPAddress");
+	$mapping_array  = array("PhysAddress", "IPv4Address.1.IPAddress", "Layer1Interface", "HostName", "Active", "AddressSource", "X_CISCO_COM_RSSI", "Comments", "IPAddress", "IPv6Address.1.IPAddress", "IPv6Address.2.IPAddress");
 
 	$HostIndexArr = DmExtGetInstanceIds("Device.Hosts.Host.");
 	if(0 == $HostIndexArr[0]){  
