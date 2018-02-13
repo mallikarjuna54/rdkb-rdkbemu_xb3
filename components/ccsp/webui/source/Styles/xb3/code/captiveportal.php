@@ -24,26 +24,21 @@
 
 	/*------	logic to figure out LAN or WiFi from Connected Devices List	------*/
 	/*------	get clients IP		------*/
-	// Known prefix
-	$v4mapped_prefix_hex = '00000000000000000000ffff';
-	$v4mapped_prefix_bin = pack("H*", $v4mapped_prefix_hex);
+	$ipv4map_hexi = '00000000000000000000ffff';
+	$ipv4map_bin = pack("H*", $ipv4map_hexi);
 
-	// Parse
-	$addr = $_SERVER['REMOTE_ADDR'];
-	$addr_bin = inet_pton($addr);
-	if( $addr_bin === FALSE ) {
-	  // Unparsable? How did they connect?!?
+	$address = $_SERVER['REMOTE_ADDR'];
+	$address_bin = inet_pton($address);
+	if( $address_bin === FALSE ) {
 	  die('Invalid IP address');
 	}
 
-	// Check prefix
-	if( substr($addr_bin, 0, strlen($v4mapped_prefix_bin)) == $v4mapped_prefix_bin) {
-	  // Strip prefix
-	  $addr_bin = substr($addr_bin, strlen($v4mapped_prefix_bin));
+	if( substr($address_bin, 0, strlen($ipv4map_bin)) == $ipv4map_bin) {
+	  $address_bin = substr($address_bin, strlen($ipv4map_bin));
 	}
 
 	// Convert back to printable address in canonical form
-	$clientIP = inet_ntop($addr_bin);
+	$clientIP = inet_ntop($address_bin);
 
 	/*------	cross check IP in Connected Devices List	------*/
 	function ProcessLay1Interface($interface){
