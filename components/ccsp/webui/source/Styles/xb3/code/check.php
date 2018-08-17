@@ -118,7 +118,7 @@
 					exec("/usr/bin/logger -t GUI -p local5.notice 'User:admin login'");
 					if ($curPwd3 == 'password')
 					{
-						echo '<script type="text/javascript"> if (confirm("You are using a default password, would you like to change it?")) {location.href = "password_change.php";} else {location.href = "at_a_glance.php";} </script>';
+						echo '<script type="text/javascript"> if (confirm("You are using a default password, would you like to change it?")) {location.href = "admin_password_change.php";} else {location.href = "at_a_glance.php";} </script>';
 					}
 					else
 					{

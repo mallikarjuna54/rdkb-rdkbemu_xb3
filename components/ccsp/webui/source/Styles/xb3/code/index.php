@@ -22,6 +22,7 @@
 $CONFIGUREWIFI	= getStr("Device.DeviceInfo.X_RDKCENTRAL-COM_ConfigureWiFi");
 $Cloud_Enabled	= getStr("Device.DeviceInfo.X_RDKCENTRAL-COM_CloudUIEnable");
 $Cloud_WebURL	= getStr("Device.DeviceInfo.X_RDKCENTRAL-COM_CloudUIWebURL");
+$CaptivePortalEnable    = getStr("Device.DeviceInfo.X_RDKCENTRAL-COM_CaptivePortalEnable");
 
 $url = $_SERVER['HTTP_HOST'];
 $Wan_IPv4 = getStr("Device.X_CISCO_COM_CableModem.IPAddress");
@@ -49,7 +50,9 @@ if(!$isMSO) {
 	}
 
 	if(strstr($CONFIGUREWIFI, "true")) {
-		header('Location:captiveportal.php');
+		if(strstr($CaptivePortalEnable, "true")) {
+			header('Location:captiveportal.php');
+		}
 	}
 }
 
