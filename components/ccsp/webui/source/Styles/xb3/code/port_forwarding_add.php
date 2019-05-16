@@ -57,7 +57,6 @@ label{
 
 </style>
 
-<script type="text/javascript" src="cmn/js/lib/jquery.alerts.progress.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     comcast.page.init("Advanced > Port Forwarding > Add Service", "nav-port-forwarding");

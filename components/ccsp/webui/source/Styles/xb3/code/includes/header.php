@@ -99,7 +99,7 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" media="print" href="./cmn/css/print.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="./cmn/css/lib/jquery.radioswitch.css" />
-
+	<link rel="stylesheet" type="text/css" media="screen" href="./cmn/css/lib/progressBar.css" />
 	<!--Character Encoding-->
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 
@@ -115,7 +115,8 @@
 
 	<script type="text/javascript" src="./cmn/js/utilityFunctions.js"></script>
     <script type="text/javascript" src="./cmn/js/comcast.js"></script>
-
+   <script type="text/javascript" src="./cmn/js/lib/bootstrap.min.js"></script>
+   <script type="text/javascript" src="./cmn/js/lib/bootstrap-waitingfor.js"></script>
 	<style>
 	#div-skip-to {
 		position:relative; 
