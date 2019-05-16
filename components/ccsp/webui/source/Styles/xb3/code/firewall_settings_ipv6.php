@@ -28,7 +28,6 @@
 
 <?php include('includes/nav.php'); ?>
  
-<script type="text/javascript" src="./cmn/js/lib/jquery.alerts.progress.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     comcast.page.init("Gateway > Firewall > IPv6", "nav-firewall-ipv6");
