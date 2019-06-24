@@ -407,7 +407,7 @@ function showTracerouteDialog() {
 		</div>
 		<div class="form-row odd">
 			<label for="destination_address"> Destination Address: </label>
-			<input type="text" value="www.comcast.net" id="destination_address" name="destination_address"  size="25" />
+			<input type="text" value="www.google.com" id="destination_address" name="destination_address"  size="25" />
 			<span for="count" ><b> Count: </b></span>
 			<label for="count1"  class="acs-hide"></label>
 			<input type="text" value=4 id="count1" name="count1" maxlength="1" size="1" />
