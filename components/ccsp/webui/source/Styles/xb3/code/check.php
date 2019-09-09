@@ -19,6 +19,16 @@
 */
 ?>
 <?php
+
+$flag=0;
+$passLockEnable = getStr("Device.UserInterface.PasswordLockoutEnable");
+$failedAttempt=getStr("Device.Users.User.3.NumOfFailedAttempts");
+$passLockoutAttempt=getStr("Device.UserInterface.PasswordLockoutAttempts");
+$passLockoutTime=getStr("Device.UserInterface.PasswordLockoutTime");
+$passLockoutTimeMins=(float)number_format(($passLockoutTime/(1000*60)),2);
+$client_ip = $_SERVER["REMOTE_ADDR"];       // $client_ip="::ffff:10.0.0.101";
+$server_ip = $_SERVER["SERVER_ADDR"];
+
     if (isset($_POST["username"]))
 	{
 		session_start();
@@ -105,37 +115,47 @@
         }
         elseif ($_POST["username"] == "admin")
 		{
-			$curPwd3 = getStr("Device.Users.User.3.X_CISCO_COM_Password");
-			if ($_POST["password"] == $curPwd3) 
-            {
-				if ( !innerIP($client_ip) && (if_type($server_ip)!="rg_ip") )
-				{
-					session_destroy();
-					echo '<script type="text/javascript"> alert("Access denied!"); history.back(); </script>';
-				}
-				else
-				{
-					exec("/usr/bin/logger -t GUI -p local5.notice 'User:admin login'");
-					if ($curPwd3 == 'password')
-					{
-						echo '<script type="text/javascript"> if (confirm("You are using a default password, would you like to change it?")) {location.href = "admin_password_change.php";} else {location.href = "at_a_glance.php";} </script>';
-					}
-					else
-					{
-                        header("location:at_a_glance.php");
-					}
-				}
-            }
-            elseif ("" == $curPwd3)
-            {
-				session_destroy();
-				echo '<script type="text/javascript"> alert("Can not get password for admin from backend!"); history.back(); </script>';
-            }
-            else
-            {
-				session_destroy();
-				echo '<script type="text/javascript"> alert("Incorrect password for admin!"); history.back(); </script>';
-            }
+			$return_status = setStr("Device.Users.User.3.X_RDKCENTRAL-COM_ComparePassword",$_POST["password"],true);
+                                sleep(1);
+                                $passVal = getStr("Device.Users.User.3.X_RDKCENTRAL-COM_ComparePassword");
+
+                                if(!$return_status) $passVal = "Invalid_PWD";
+                                if($passVal=="Invalid_PWD"){
+                                        setStr("Device.DeviceInfo.X_RDKCENTRAL-COM_UI_ACCESS","ui_failed",true);
+                                        session_destroy();
+                                        if($passLockEnable == "true"){
+                                                if($failedAttempt<$passLockoutAttempt){
+                                                        $failedAttempt=$failedAttempt+1;
+                                                        setStr("Device.Users.User.3.NumOfFailedAttempts",$failedAttempt,true);
+                                                }
+                                                if($failedAttempt==$passLockoutAttempt){
+                                                        $flag=1;
+                                                        echo '<script type="text/javascript"> alert("You have '.$passLockoutAttempt.' failed login attempts and your account will be locked for '.$passLockoutTimeMins.' minutes");history.back();</script>';
+                                                }
+                                        }
+                                        if($flag==0){
+                                                session_destroy();
+                                                echo '<script type="text/javascript"> alert("Incorrect password for admin!");history.back(); </script>';
+                                        }
+                                }
+                                else{
+                                        if(($passLockEnable == "true") && ($failedAttempt==$passLockoutAttempt)){
+                                                $flag=1;
+                                                echo '<script type="text/javascript"> alert("You have '.$passLockoutAttempt.' failed login attempts and your account will be locked for '.$passLockoutTimeMins.' minutes");history.back();</script>';
+                                        }
+                                        else{
+						$failedAttempt=0;
+						setStr("Device.Users.User.3.NumOfFailedAttempts",$failedAttempt,true);
+                                                exec("/usr/bin/logger -t GUI -p local5.notice 'User:admin login'");
+                                                setStr("Device.DeviceInfo.X_RDKCENTRAL-COM_UI_ACCESS","ui_success",true);
+                                                if($passVal=="Default_PWD"){
+                                                        echo '<script type="text/javascript"> if (confirm("You are using a default password, would you like to change it?")) {location.href = "admin_password_change.php";} else {location.href = "at_a_glance.php";} </script>';
+                                                }
+                                                else {
+                                                        header("location:at_a_glance.php");
+                                                }
+                                        }
+                                }
         }
         else
 		{
