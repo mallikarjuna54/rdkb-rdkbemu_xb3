@@ -34,13 +34,19 @@ $i = $arConfig['instanceNum'];
 
 $p_status = "MisMatch";
 
-if (getStr("Device.Users.User.$i.X_CISCO_COM_Password") ==  $arConfig['oldPassword']) 
+setStr("Device.Users.User.3.X_RDKCENTRAL-COM_ComparePassword",$arConfig['oldPassword'],true);
+sleep(1);
+//Good_PWD, Default_PWD, Invalid_PWD
+$passVal= getStr("Device.Users.User.3.X_RDKCENTRAL-COM_ComparePassword");
+if ($passVal=="Good_PWD" || $passVal=="Default_PWD")
 {
-	if($arConfig['ChangePassword']){
-		setStr("Device.Users.User.3.X_CISCO_COM_Password", $arConfig['newPassword'], true);
-	}
-	$p_status = "Match";
-	//setStr("Device.Users.User.$i.X_CISCO_COM_Password", $arConfig['newPassword'], true);	
+        if($arConfig['ChangePassword']){
+                setStr("Device.Users.User.3.X_CISCO_COM_Password", $arConfig['newPassword'], true);
+        }
+        $p_status = "Match";
+}
+else {
+        $p_status = "MisMatch";
 }
 
 $arConfig = array('p_status'=>$p_status);
