@@ -40,16 +40,39 @@ function MiniApplySSID($ssid) {
 	setStr("Device.WiFi.Radio.$apply_rf.X_CISCO_COM_ApplySetting", "true", true);
 }
 
+//check if $ssid_name is as per specs
+function valid_ssid_name($ssid_name){
+        $ssid_name = strtolower($ssid_name);
+        //1 to 32 ASCII characters
+        $ssid_name_check = (preg_match('/^[ -~]{1,32}$/', $ssid_name) == 1);
+        //SSID name cannot contain only spaces
+        $not_only_spaces_check = (preg_match('/^\s+$/', $ssid_name) != 1);
+        //SSID Starting with "XHS-" and "XH-" are reserved
+        $not_hhs_check  = (preg_match('/^xhs-|^xh-/', $ssid_name) != 1);
+        //SSID containing "optimumwifi", "TWCWiFi", "cablewifi" and "xfinitywifi" are reserved
+        $ssid_name = preg_replace('/[\.,-\/#@!$%\^&\*;:{}=+?\-_`~()"\'\\|<>\[\]\s]/', '', $ssid_name);
+        $not_hhs2_check = !((strpos($ssid_name, 'cablewifi') !== false) || (strpos($ssid_name, 'twcwifi') !== false) || (strpos($ssid_name, 'optimumwifi') !== false) || (strpos($ssid_name, 'xfinitywifi') !== false) || (strpos($ssid_name, 'xfinity') !== false) || (strpos($ssid_name, 'coxwifi') !== false) || (strpos($ssid_name, 'spectrumwifi') !== false)  || (strpos($ssid_name, 'shawopen') !== false)  || (strpos($ssid_name, 'shawpasspoint') !== false) || (strpos($ssid_name, 'shawguest') !== false) || (strpos($ssid_name, 'shawmobilehotspot') !== false) || (strpos($ssid_name, 'shawgo') !== false) );
+        return $ssid_name_check && $not_only_spaces_check && $not_hhs_check && $not_hhs2_check;
+}
+
+$response_message = '';
 //change SSID status first, if disable, no need to configure following
 setStr("Device.WiFi.SSID.$i.Enable", $arConfig['radio_enable'], true);
 
 if ("true" == $arConfig['radio_enable']) 
 {
+	$validation = true;
 	// check if the LowerLayers radio is enabled
 	if ("false" == getStr("Device.WiFi.Radio.$r.Enable")){
 		setStr("Device.WiFi.Radio.$r.Enable", "true", true);
 	}
 	
+	if($validation && !valid_ssid_name($arConfig['network_name']))
+                        {
+                                $validation = false;
+                                $response_message = _('WiFi name is not valid. Please enter a new name !');
+                        }
+	if($validation){
 	switch ($arConfig['security'])
 	{
 		case "WEP_64":
@@ -139,12 +162,17 @@ if ("true" == $arConfig['radio_enable'])
 				array("Device.WiFi.AccessPoint.$i.WMMEnable",   "bool", $arConfig['enableWMM'])));			
 		}
 	}
+    }
 }
 
 
 // setStr("Device.WiFi.Radio.$r.X_CISCO_COM_ApplySetting", "true", true);
 MiniApplySSID($i);
 
-echo $jsConfig;
+if($response_message!='') {
+        $response->error_message = $response_message;
+        echo htmlspecialchars(json_encode($response), ENT_NOQUOTES, 'UTF-8');
+}
+else echo htmlspecialchars($jsConfig, ENT_NOQUOTES, 'UTF-8');
 
 ?>

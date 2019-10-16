@@ -546,8 +546,8 @@ wpa2psk ==> 8 to 63 Ascii characters
     	rules: {
 			network_name: {
 				ssid_name: true,
-				not_hhs: true,
-				not_hhs2: true
+				//not_hhs: true,
+				//not_hhs2: true
 			},
 
     		network_password: {
@@ -691,6 +691,7 @@ function init_form()
 
 function click_save()
 {
+	var network_name_1= "<?php echo htmlspecialchars($network_name); ?>";
 	var radio_enable		= $("#wireless_network_switch").radioswitch("getState").on;
 	var network_name		= $("#network_name").val();
 	var wireless_mode		= $("#wireless_mode").attr("value");
@@ -727,7 +728,12 @@ function click_save()
 		success: function(msg) {            
 			jHide();
 			// location.reload();
-			location.href = 'wireless_network_configuration.php';
+			msg_parseJSON = $.parseJSON(msg);
+			if(msg_parseJSON.error_message){
+                                jAlert(msg_parseJSON.error_message);
+                                $("#network_name").val(network_name_1);
+                        } else
+				location.href = 'wireless_network_configuration.php';
 		},
 		error: function(){            
 			jHide();
