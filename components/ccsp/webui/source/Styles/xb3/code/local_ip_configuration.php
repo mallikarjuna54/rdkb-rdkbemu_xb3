@@ -18,11 +18,30 @@
  * limitations under the License.
 */
 ?>
-﻿<?php include('includes/header.php'); ?>
+<?php include('includes/header.php'); ?>
 <div id="sub-header">
 	<?php include('includes/userbar.php'); ?>
 </div><!-- end #sub-header -->
 <?php include('includes/nav.php'); ?>
+<?php
+		$min=255;
+		$count = 0;
+	        $StaticAddressNumber = getstr("Device.DHCPv4.Server.Pool.1.StaticAddressNumberOfEntries");
+		$num = (int)$StaticAddressNumber;
+		for($i=1;$count!=$num;$i++)
+		{
+			$Yiaddr = getStr("Device.DHCPv4.Server.Pool.1.StaticAddress.$i.Yiaddr");
+			$ip4 = explode(".",$Yiaddr);
+			$tmp = (int)$ip4[3];
+			if( $tmp < $min)
+			{
+				$min = $tmp;
+				$count=$count+1;
+			}
+			
+		}	
+		
+?>
 <?php 
 $LanGwIP    = getStr("Device.X_CISCO_COM_DeviceControl.LanManagementEntry.1.LanIPAddress");
 $DHCPTime   = getStr("Device.DHCPv4.Server.Pool.1.LeaseTime");
@@ -690,7 +709,12 @@ $('#submit_ipv4').click(function(e){
 	var CM_GW_IP_Address = "<?php echo $CM_GW_IP_Address;?>";
 	var WAN_GW_IPv4_Address = "<?php echo $WAN_GW_IPv4_Address;?>";
 	var LAN_GW_IPv4_Address = "<?php echo $LAN_GW_IPv4_Address;?>";
-
+	var RESERVED_IP = "<?php echo $min;?>";
+	if ( dhcp4B4 > RESERVED_IP || dhcp4E4 < RESERVED_IP)
+		{
+			jAlert("Reserved ip of client is out of DHCP range , please input again!");
+			return;
+		}
 	if(ipaddr == CM_GW_IP_Address){
 		jAlert("This IP address is reserved for CM Gateway IP Address, please input again!");
 	    	return;
