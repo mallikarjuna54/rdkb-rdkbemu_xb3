@@ -65,7 +65,7 @@ if( array_key_exists('URL', $blockedSiteInfo) ) {
 		//Check for time and day conflicts
 		$TD1=array($startTime, $endTime, $blockDays);
 		$TD2=array($start_Time, $end_Time, $block_Days);
-		if (($url == getStr($objPrefix.$value.".Site")) && ((($always_Block == "true") || ($block == "true") || time_date_conflict($TD1, $TD2)))){
+		if ((strcasecmp($url, getStr($objPrefix.$value.".Site"))==0) && ((($always_Block == "true") || ($block == "true") || time_date_conflict($TD1, $TD2)))){
 			$result .= "Conflict with other blocked site rule. Please check your input!";
 			break;
 		}
