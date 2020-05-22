@@ -82,12 +82,16 @@
 	}
 	// doc psmMode into session, for directly use it in function
 	$_SESSION["psmMode"] = $psmMode;
+	$title=getStr("Device.DeviceInfo.X_RDKCENTRAL-COM_Syndication.RDKB_UIBranding.LocalUI.MSOLogoTitle");
+        $msoLogo= getStr("Device.DeviceInfo.X_RDKCENTRAL-COM_Syndication.RDKB_UIBranding.LocalUI.MSOLogo");
+        $logo="cmn/syndication/img/".$msoLogo;
+        $partnerId = getStr("Device.DeviceInfo.X_RDKCENTRAL-COM_Syndication.PartnerId");
 
 ?>
 
 
 <head>
-	<title>Xfinity</title>
+	<title><?php echo $title; ?></title>
 
 	<!--CSS-->
 	<link rel="stylesheet" type="text/css" media="screen" href="./cmn/css/common-min.css?sid=<?php echo $_SESSION["sid"]; ?>" />
@@ -136,7 +140,25 @@
 	}
 	</style>	
 </head>
+<script type="text/javascript">
+        var partner_id = '<?php echo $partnerId; ?>';
+        $(document).ready(function() {
 
+                var logo= "<?php echo $msoLogo;  ?>";
+                        if(logo.indexOf('videotron')!==-1){
+                                $('#logo').addClass("helix");
+                        }
+
+                $("table.data td").each(function() {
+                        if($(this).text().split("\n")[0].length > 25)
+                        {
+                                if(partner_id.indexOf('sky-')===-1|| $(this).attr('headers') == 'server-ipv6' || $(this).attr('headers') == 'IP')
+                                   $(this).closest('table').css("table-layout", "fixed");
+                                $(this).css("word-wrap", "break-word");
+                        }
+                });
+        });
+</script>
 <body>
     <!--Main Container - Centers Everything-->
 	<div id="container">
@@ -150,7 +172,7 @@
 				else
 					echo '<p style="margin: 0">&nbsp;</p>';
 			?>
-			<h2 id="logo" style="margin-top: 10px"><img src="./cmn/img/logo_xfinity.png" alt="Xfinity" title="Xfinity" /></h2>
+			<h2 id="logo" style="margin-top: 10px"><?php echo "<img src='".$logo."' alt='".$title."'  title='".$title."' />"; ?></h2>
 		</div> <!-- end #header -->
 
 		<div id='div-skip-to' style="display: none;">

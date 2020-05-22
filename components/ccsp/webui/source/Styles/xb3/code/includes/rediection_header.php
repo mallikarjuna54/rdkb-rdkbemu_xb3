@@ -76,7 +76,7 @@
 
 		<!--Header-->
 		<div id="header">
-			<h2 id="logo"><img src="./cmn/img/logo_xfinity.png" alt="Xfinity" title="Xfinity" /></h2>
+			<h2 id="logo"><img src="./cmn/syndication/img/logo_rdk.png" alt="RDKM" title="RDKM" /></h2>
 		</div> <!-- end #header -->
 
 		<div id='div-skip-to' style="display: none;">
