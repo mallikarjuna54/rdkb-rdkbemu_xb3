@@ -36,7 +36,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    comcast.page.init("Gateway > Connection > XFINITY Network", "nav-comcast-network");
+    comcast.page.init("Gateway > Connection > RDKM Network", "nav-comcast-network");
 
 	if ("cusadmin" == "<?php echo $_SESSION["loginuser"]; ?>"){
 		$(".div_cm").remove();
@@ -99,15 +99,15 @@ function sec2dhms($sec)
 
 <div id="content">
 
-<h1>Gateway > Connection > XFINITY Network</h1>
+<h1>Gateway > Connection > RDKM Network</h1>
 
 <div id="educational-tip">
-	<p class="tip">View technical information related to your XFINITY network connection.</p>
+	<p class="tip">View technical information related to your RDKM network connection.</p>
 	<p class="hidden">You may need this information if you contact Comcast for troubleshooting assistance.</p>
 </div>
 
 <div class="module forms">
-	<h2>XFINITY Network</h2>
+	<h2>RDKM Network</h2>
 	<div class="form-row">
 		<span class="readonlyLabel">Internet:</span>
 		<span class="value"><?php echo ($sta_inet=="true") ? "Active" : "Inactive";?></span>
